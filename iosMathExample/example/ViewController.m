@@ -87,7 +87,7 @@
 
     // Demo formulae
     // Quadratic formula
-    self.demoLabels[0] = [self createMathLabel:@"x = \\frac{-b \\pm \\sqrt{b^2-4ac}}{2a}" withHeight:60];
+    self.demoLabels[0] = [self createMathLabel:@"x = -14𝑥+3, -5𝑥²+15𝑥-5" withHeight:60];
     [self addLabelAsSubview:self.demoLabels[0] to:contentView];
     self.demoLabels[0].fontSize = 15;
     // This is first label so set the height from the top
@@ -127,9 +127,9 @@
     self.demoLabels[11] = [self createMathLabel:@"i\\hbar\\frac{\\partial}{\\partial t}\\mathbf\\Psi(\\mathbf{x},t) = "
                            "-\\frac{\\hbar}{2m}\\nabla^2\\mathbf\\Psi(\\mathbf{x},t) + "
                            "V(\\mathbf{x})\\mathbf\\Psi(\\mathbf{x},t)" withHeight:40];
-    
+
     self.demoLabels[12] = [self createMathLabel:@"\\left(\\sum_{k=1}^n a_k b_k \\right)^2 \\le \\left(\\sum_{k=1}^n a_k^2\\right)\\left(\\sum_{k=1}^n b_k^2\\right)" withHeight:60];
-    
+
     self.demoLabels[13] = [self createMathLabel:@"{n \\brace k} = \\frac{1}{k!}\\sum_{j=0}^k (-1)^{k-j}\\binom{k}{j}(k-j)^n" withHeight:60];
 
     self.demoLabels[14] = [self createMathLabel:@"f(x) = \\int\\limits_{-\\infty}^\\infty\\!\\hat f(\\xi)\\,e^{2 \\pi i \\xi x}\\,\\mathrm{d}\\xi" withHeight:60];
@@ -175,7 +175,7 @@
                            "\\frac{e^x}{2} & x \\geq 0 \\\\"
                            "1 & x < 0"
                            "\\end{cases}" withHeight:60];
-    
+
     self.demoLabels[21] = [self createMathLabel:@"\\color{#ff3333}{c}\\color{#9933ff}{o}\\color{#ff0080}{l}+\\color{#99ff33}{\\frac{\\color{#ff99ff}{o}}{\\color{#990099}{r}}}-\\color{#33ffff}{\\sqrt[\\color{#3399ff}{e}]{\\color{#3333ff}{d}}}" withHeight:60];
 
 
@@ -186,7 +186,7 @@
 
     MTMathUILabel* lastDemoLabel = self.demoLabels[self.demoLabels.count - 1];
 
-    // Test formulae
+//     Test formulae
     self.labels[0] = [self createMathLabel:@"3+2-5 = 0" withHeight:40];
     self.labels[0].backgroundColor = [UIColor colorWithHue:0.15 saturation:0.2 brightness:1.0 alpha:1.0];
     [self addLabelAsSubview:self.labels[0] to:contentView];
@@ -431,6 +431,18 @@
     }
 }
 
+- (void)xitsCNButtonPressed:(id)sender
+{
+    for (MTMathUILabel* label in self.demoLabels) {
+        label.font = [[MTFontManager fontManager] xitsFontAndChineseExtensionWithSize:label.font.fontSize];
+    }
+    for (MTMathUILabel* label in self.labels) {
+        label.font = [[MTFontManager fontManager] xitsFontAndChineseExtensionWithSize:label.font.fontSize];
+    }
+}
+
+
+
 - (void) changeColor:(UIColor*) color
 {
     for (MTMathUILabel* label in self.demoLabels) {
@@ -467,7 +479,7 @@
 {
     self = [super init];
     if (self) {
-        self.fontNames = @[@"Latin Modern Math", @"TeX Gyre Termes", @"XITS Math"];
+        self.fontNames = @[@"Latin Modern Math", @"TeX Gyre Termes", @"XITS Math", @"XITS CN"];
     }
     return self;
 }
@@ -501,6 +513,9 @@
 
         case 2:
             [self.controller xitsButtonPressed:nil];
+            
+        case 3:
+            [self.controller xitsCNButtonPressed:nil];
 
         default:
             break;
